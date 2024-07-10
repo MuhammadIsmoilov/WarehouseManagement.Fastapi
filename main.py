@@ -1,3 +1,11 @@
-print("Helo World")
+from fastapi import FastAPI
 
-print("Hello Vatan ICT")
+app = FastAPI()
+
+
+app.get('/')
+async def root():
+    return {"message": "Hello World"}
+
+
+
