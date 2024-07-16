@@ -8,3 +8,6 @@ async def root():
     return {"message": "Hello World"}
 
 
+app.get('/test')
+async def test():
+    return {"message": "Hello World"}
