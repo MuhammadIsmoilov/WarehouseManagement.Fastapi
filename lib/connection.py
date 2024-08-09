@@ -1,4 +1,3 @@
-from inspect import indentsize
 from lib.config import configdb
 from pypika import NULL, Schema
 from pypika import PostgreSQLQuery as Q
@@ -22,8 +21,8 @@ def connection():
     except Exception as e:
         con.rollback()
         cur.close()
-        print("db error: {}".format(e))
-        raise HTTPException(status_code=409, detail="db error: {}".format(e))
+        print("Error occured: {}".format(e))
+        raise e
     finally:
         cur.close()
         pg_pool.putconn(con)

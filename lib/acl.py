@@ -20,6 +20,7 @@ class JWTBearer(HTTPBearer):
             return credentials.credentials
         else:
             raise HTTPException(status_code=401, detail="Not authenticated.")
+        
     def verify_jwt(self, jwtoken: str, request: Request) -> bool:
         isTokenValid: bool = False
         try:

@@ -1,6 +1,19 @@
 from pydantic import BaseModel
 from typing import Union 
 from datetime import datetime
+from enum import Enum
+
+
+
+class Tags(Enum):
+    login = 'Login'
+    user = 'User'
+    sales = 'Sales'
+    purchase = 'Buying'
+    catalog = 'Catalogs'
+    customer = 'Customer'
+    provider = 'Supplier'
+    inventory = 'Inventory'
 
 
 class UsersRegistration(BaseModel):
@@ -9,19 +22,19 @@ class UsersRegistration(BaseModel):
     user_address: str
     user_phone_number: str
     user_password: str
-    role_id: Union[int, None] = None
+    role_id:int
 
-class UserDelete(BaseModel):
-    user_id:int
+
+
 
 class UserUpdate(BaseModel):
-        user_id:int
-        fullname: str
-        gender: str
-        user_address: str
-        user_phone_number: str
-        user_password: str
-        role_id: int
+    user_id:int
+    fullname: str
+    gender: str
+    user_address: str
+    user_phone_number: str
+    user_password: str
+    role_id:int
 
 
 
@@ -30,38 +43,105 @@ class RoleInsert(BaseModel):
     role_name: str
 
 
-class RoleDelete(BaseModel):
-    role_id:int
 
 class RoleUpdate(BaseModel):
     role_id:int
     role_name: str
-      
+
+
+class RolesPermissionInsert(BaseModel):
+    role_id:int
+    permission_id:int
+
+
+
+class RolesPermissionUpdate(BaseModel):
+    roles_permission_id:int
+    role_id:int
+    permission_id:int
+
 
 class InvoiceInsert(BaseModel):
-    customer_id:int
-    product_id:int
-    invoice_quontity:int
-    invoice_unit_price:int
-    invoice_date:datetime
-    invoice_total_amount:int
+    customer_id: Union[int,None] = None
+    invoice_quantity: Union[int,None] = None
+    invoice_unit_price: Union[int,None] = None
+    invoice_date: Union[datetime,None] = None
 
-class InvoiceDelete(BaseModel):
-    invoice_id:int
 
 class InvoiceUpdate(BaseModel):
+    invoice_id:Union[int,None] = None
+    customer_id:Union[int,None] = None
+    invoice_quantity:Union[int,None] = None
+    invoice_unit_price:Union[int,None] = None
+    invoice_date:Union[datetime,None] = None
+
+
+class InvoicePropertyInsert(BaseModel):
+    prod_id:int
     invoice_id:int
-    customer_id:int
-    product_id:int
-    invoice_quontity:int
-    invoice_unit_price:int
-    invoice_date:datetime
-    invoice_total_amount:int
+
+
+
+class InvoicePropertyUpdate(BaseModel):
+    property_id:int
+    prod_id:int
+    invoice_id:int
+
+
+
+class PurchaseInsert(BaseModel):        
+    sup_id:int                      
+    purch_date:datetime      
+    purch_quantity:int   
+    purch_unit_price:int
+    user_id:int
+
+class PurchaseUpdate(BaseModel):
+    purch_id:int         
+    sup_id:int                                            
+    purch_date:datetime      
+    purch_quantity:int   
+    purch_unit_price:int
+    user_id:int
+
+        
+
+
+
+
+class PurchasePropertyInsert(BaseModel):        
+    prod_id:int
+    purchase_id:int
+
+class PurchasePropertyUpdate(BaseModel):
+    property_id:int
+    prod_id:int
+    purchase_id:int
+
 
 
 class InsertCategory(BaseModel):
     ctg_name:str
-    parent_category:Union[int,None] = None
+    parent_category_id:Union[int,None] = None
+
+class UpdateCategory(BaseModel):
+    ctg_id:int
+    ctg_name:str
+    parent_category_id:Union[int,None] = None
+
+
+
+
+
+class InsertNomenclature(BaseModel):
+    nom_name:str
+    nom_description:str
+
+class UpdateNomenclature(BaseModel):
+    nom_id:int
+    nom_name:str
+    nom_description:str
+
 
 
 
@@ -78,8 +158,7 @@ class UpdateCustomer(BaseModel):
     custom_custom_contact_info:Union[str,None] = None
 
 
-class DeleteCustomer(BaseModel):
-    custom_id:int
+
 
 
 class InsertSupplier(BaseModel):
@@ -96,5 +175,46 @@ class UpdateSupplier(BaseModel):
 
 
 
-class DeleteSupplier(BaseModel):
-    supp_id:int
+
+
+
+
+class ProductInsert(BaseModel):
+    nom_id:int
+    category_id:int
+    prod_price:int
+    prod_quontity:int
+    articul:Union[str,None] = None
+    barcode:Union[str,None] = None
+    prod_attribute:Union[dict,None] = None
+
+
+class ProductUpdate(BaseModel):
+    prod_id:int
+    nom_id:int
+    category_id:int
+    prod_price:int
+    prod_quontity:int
+    articul:Union[str,None] = None
+    barcode:Union[str,None] = None
+    prod_attribute:Union[dict,None] = None
+
+
+class Incoming_and_outgoingInsert(BaseModel):
+    product_id:int
+    quantity:int
+    date_of_incoming_and_outgoing:datetime
+    incoming_and_outgoing_type:bool
+    is_active:bool
+
+
+
+class UpdateIncoming_and_outgoing(BaseModel):
+    income_id:int
+    product_id:int
+    quantity:int
+    date_of_incoming_and_outgoing:datetime
+    incoming_and_outgoing_type:bool
+    is_active:bool
+
+
