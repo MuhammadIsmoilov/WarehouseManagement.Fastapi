@@ -4,6 +4,7 @@ from lib.config import Keys
 from authlib.jose import jwt
 import time
 
+
 app = FastAPI()
 
 secret = Keys()
@@ -28,6 +29,7 @@ class JWTBearer(HTTPBearer):
             payload = jwt.decode(jwtoken, secret.publickey) 
         except Exception as e:
             payload = None
+            
         if payload:
             if time.time() < payload['expires']:
                 if payload['type'] == 0:
@@ -40,6 +42,7 @@ class JWTBearer(HTTPBearer):
                 if payload['type'] == 1:
                     raise HTTPException(status_code=401, detail="Invalid token or expired token.")
         return isTokenValid
+
 
 def access_token(login: str, user: str,):
     payload = {
@@ -67,6 +70,7 @@ def refresh_token(login: str, user: str):
 def refresh_access_token(token):
     decoded_token = decodeJWT(token)
     return access_token(decoded_token['user_login'], decoded_token['id'])
+
 
 def decodeJWT(token: str) -> dict:
     try:

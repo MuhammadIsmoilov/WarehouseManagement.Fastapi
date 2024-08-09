@@ -6,7 +6,8 @@ from enum import Enum
 
 
 class Tags(Enum):
-    login = 'Login'
+
+    login = 'Login - Registration'
     user = 'User'
     sales = 'Sales'
     purchase = 'Buying'
@@ -25,8 +26,6 @@ class UsersRegistration(BaseModel):
     role_id:int
 
 
-
-
 class UserUpdate(BaseModel):
     user_id:int
     fullname: str
@@ -38,15 +37,22 @@ class UserUpdate(BaseModel):
 
 
 
+class UserLogin(BaseModel):
+    phone_number:str
+    password:str
+
+
 
 class RoleInsert(BaseModel):
     role_name: str
+    
 
 
 
 class RoleUpdate(BaseModel):
     role_id:int
     role_name: str
+
 
 
 class RolesPermissionInsert(BaseModel):
@@ -61,11 +67,22 @@ class RolesPermissionUpdate(BaseModel):
     permission_id:int
 
 
+  
+
+
+
+
+
+
+
+
+
 class InvoiceInsert(BaseModel):
     customer_id: Union[int,None] = None
     invoice_quantity: Union[int,None] = None
     invoice_unit_price: Union[int,None] = None
     invoice_date: Union[datetime,None] = None
+
 
 
 class InvoiceUpdate(BaseModel):
@@ -107,6 +124,14 @@ class PurchaseUpdate(BaseModel):
         
 
 
+class InsertCategory(BaseModel):
+    ctg_name:str
+    parent_category_id:Union[int,None] = None
+
+class UpdateCategory(BaseModel):
+    ctg_id:int
+    ctg_name:str
+    parent_category_id:Union[int,None] = None
 
 
 class PurchasePropertyInsert(BaseModel):        
@@ -120,18 +145,6 @@ class PurchasePropertyUpdate(BaseModel):
 
 
 
-class InsertCategory(BaseModel):
-    ctg_name:str
-    parent_category_id:Union[int,None] = None
-
-class UpdateCategory(BaseModel):
-    ctg_id:int
-    ctg_name:str
-    parent_category_id:Union[int,None] = None
-
-
-
-
 
 class InsertNomenclature(BaseModel):
     nom_name:str
@@ -141,6 +154,9 @@ class UpdateNomenclature(BaseModel):
     nom_id:int
     nom_name:str
     nom_description:str
+
+
+
 
 
 
@@ -179,6 +195,30 @@ class UpdateSupplier(BaseModel):
 
 
 
+
+
+
+class InsertPermission(BaseModel):
+    permission_name:str
+
+
+class UpdatePermission(BaseModel):
+    permission_id:int
+    permission_name:str
+
+
+
+class RolesPermissionInsert(BaseModel):
+    role_id:int
+    permission_id:int
+
+
+class RolesPermissionUpdate(BaseModel):
+    roles_permission_id:int
+    role_id:int
+    permission_id:int
+
+
 class ProductInsert(BaseModel):
     nom_id:int
     category_id:int
@@ -187,7 +227,6 @@ class ProductInsert(BaseModel):
     articul:Union[str,None] = None
     barcode:Union[str,None] = None
     prod_attribute:Union[dict,None] = None
-
 
 class ProductUpdate(BaseModel):
     prod_id:int
@@ -198,6 +237,53 @@ class ProductUpdate(BaseModel):
     articul:Union[str,None] = None
     barcode:Union[str,None] = None
     prod_attribute:Union[dict,None] = None
+
+
+
+
+
+
+
+
+
+
+class InsertInventory(BaseModel):
+    product_id:int
+    inven_quantity:int
+    updated_at:datetime
+
+
+
+class UpdateInventory(BaseModel):
+    inven_id:int
+    product_id:int
+    inven_quantity:int
+    transaction_type:str
+    transaction_type:datetime
+
+
+
+
+
+
+class GetTransactions(BaseModel):
+   nom_name:Union[str,None] = None
+   type_of_income_or_outgoing:Union[bool,None] = None
+   status:Union[bool,None] = None
+
+
+class GetStock(BaseModel):
+    nom_name:Union[str,None] = None
+    prod_value:Union[str,None] = None
+
+
+class FilterProduct(BaseModel):
+    nom_name:Union[str,None] = None
+    ctg_name:Union[str,None] = None
+    prod_price:Union[int,None] = None
+    articul:Union[str,None] = None
+    barcode:Union[str,None] = None
+    prod_properties:Union[str,None] = None
 
 
 class Incoming_and_outgoingInsert(BaseModel):
