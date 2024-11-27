@@ -24,8 +24,6 @@ class UsersRegistration(BaseModel):
     user_password: str
     role_id:int
 
-class UserDelete(BaseModel):
-    user_id:int
 
 class UserUpdate(BaseModel):
         user_id:int
@@ -47,43 +45,16 @@ class RoleInsert(BaseModel):
     role_name: str
     
 
-
-class RoleDelete(BaseModel):
-    role_id:int
-
 class RoleUpdate(BaseModel):
     role_id:int
     role_name: str
 
-class UserRolesInsert(BaseModel):
-    user_id:int
-    role_id:int 
-
-class UserRolesUpdate(BaseModel):
-    user_roles_id:int
-    user_id:int
-    role_id:int     
-      
-
-class UserRolesDelete(BaseModel):
-    user_roles_id:int  
-
-
-
-
-
-
-
-
-
+ 
 class InvoiceInsert(BaseModel):
     customer_id: Union[int,None] =None
     invoice_quantity: Union[int,None] =None
     invoice_unit_price: Union[int,None] =None
     invoice_date: Union[datetime,None] =None
-
-class InvoiceDelete(BaseModel):
-    invoice_id:int
 
 class InvoiceUpdate(BaseModel):
     invoice_id:Union[int,None] =None
@@ -96,9 +67,6 @@ class InvoiceUpdate(BaseModel):
 class InvoicePropertyInsert(BaseModel):
     prod_id:int
     invoice_id:int
-
-class InvoicePropertyDelete(BaseModel):
-    property_id:int
 
 class InvoicePropertyUpdate(BaseModel):
     property_id:int
@@ -120,9 +88,6 @@ class PurchaseUpdate(BaseModel):
     purch_quantity:int   
     purch_unit_price:int
 
-class PurchaseDelete(BaseModel):
-    purch_id:int         
-
 
 
 
@@ -134,9 +99,6 @@ class PurchasePropertyUpdate(BaseModel):
     property_id:int
     prod_id:int
     purchase_id:int
-
-class PurchasePropertyDelete(BaseModel):
-    property_id:int
 
 
 
@@ -153,9 +115,6 @@ class UpdateCustomer(BaseModel):
     custom_custom_contact_info:Union[str,None] = None
 
 
-class DeleteCustomer(BaseModel):
-    custom_id:int
-
 
 class InsertSupplier(BaseModel):
     supp_name:str
@@ -170,23 +129,6 @@ class UpdateSupplier(BaseModel):
     supp_contact_info:Union[str,None] = None
 
 
-
-class DeleteSupplier(BaseModel):
-    supp_id:int
-
-
-
-
-
-class Role(BaseModel):
-    admin:bool        
-
-
-class User(BaseModel):
-    id: int
-    login: str
-    role: Role
-
 class InsertPermission(BaseModel):
     permission_name:str
 
@@ -196,9 +138,6 @@ class UpdatePermission(BaseModel):
     permission_name:str
 
 
-class DeletePermission(BaseModel):
-    permission_id:int 
-
 
 
 class RolesPermissionInsert(BaseModel):
@@ -206,8 +145,6 @@ class RolesPermissionInsert(BaseModel):
     permission_id:int
 
 
-class RolesPermissionDelete(BaseModel):
-    roles_permission_id:int
 
 class RolesPermissionUpdate(BaseModel):
     roles_permission_id:int
@@ -234,9 +171,6 @@ class ProductUpdate(BaseModel):
     barcode:Union[str,None] = None
     prod_attribute:Union[dict,None] = None
 
-class ProductDelete(BaseModel):
-    prod_id:int
-
 
 
 class InsertNomenclature(BaseModel):
@@ -248,8 +182,6 @@ class UpdateNomenclature(BaseModel):
     nom_name:str
     nom_description:str
 
-class DeleteNomenclature(BaseModel):
-    nom_id:int
 
 
 class InsertCategory(BaseModel):
@@ -260,10 +192,6 @@ class UpdateCategory(BaseModel):
     ctg_id:int
     ctg_name:str
     parent_category_id:Union[int,None] = None
-
-class DeleteCategory(BaseModel):
-    ctg_id:int
-    parent_category_id:Union[int, None] = None
 
 
 class InsertInventory(BaseModel):
@@ -280,8 +208,7 @@ class UpdateInventory(BaseModel):
     transaction_type:str
     transaction_type:datetime
 
-class DeleteInventory(BaseModel):
-    inven_id:int
+
 
 class GetInventoryQuantity(BaseModel):
     nom_id:int

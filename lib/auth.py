@@ -18,6 +18,7 @@ def get_user_permissions(user_id: int) -> List[str]:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Database query failed: {str(e)}"
         )   
+    
 
 def check_user_permission(permission: str, token: str):
     decoded_token = ACL.decodeJWT(token)

@@ -704,10 +704,6 @@ def update_income_and_outgoing(data: UpdateIncoming_and_outgoing):
 
 
 
-
-
-
-
 @app.post('/insert/inventory',tags=[Tags.inventory])
 def insert_incentory(
     data:InsertInventory,
